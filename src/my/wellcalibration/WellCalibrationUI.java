@@ -35,6 +35,10 @@ public class WellCalibrationUI extends javax.swing.JFrame {
         initComponents();
         
         imageHandler = new ImageHandler();
+        ImagePanel imagePanel = new ImagePanel();
+        imagePanel.resize(this.LogPanel1.getWidth(), this.LogPanel1.getHeight());
+        imagePanel.setBounds(0, 0, this.LogPanel1.getWidth(), this.LogPanel1.getHeight());
+        this.LogPanel1.add(imagePanel, null, 0);
     }
 
     /**
@@ -47,13 +51,17 @@ public class WellCalibrationUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        ExplorerScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        XMLScrollPane1 = new javax.swing.JScrollPane();
+        XMLTable1 = new javax.swing.JTable();
+        LogPanel1 = new javax.swing.JScrollPane();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        XMLScrollPane2 = new javax.swing.JScrollPane();
+        XMLTable2 = new javax.swing.JTable();
+        LogPanel2 = new javax.swing.JScrollPane();
+        LogPanelJoined = new javax.swing.JScrollPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -82,9 +90,9 @@ public class WellCalibrationUI extends javax.swing.JFrame {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(jTree1);
+        ExplorerScrollPane1.setViewportView(jTree1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        XMLTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -105,7 +113,7 @@ public class WellCalibrationUI extends javax.swing.JFrame {
                 "Property", "Value"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        XMLScrollPane1.setViewportView(XMLTable1);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/wellcalibration/Microphone-01.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +128,29 @@ public class WellCalibrationUI extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        XMLTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Property", "Value"
+            }
+        ));
+        XMLScrollPane2.setViewportView(XMLTable2);
 
         jMenu5.setText("Collect");
 
@@ -146,18 +177,25 @@ public class WellCalibrationUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(ExplorerScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(XMLScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LogPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(XMLScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LogPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addComponent(LogPanelJoined)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,11 +204,18 @@ public class WellCalibrationUI extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(LogPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                            .addComponent(XMLScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(LogPanel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(XMLScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(ExplorerScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LogPanelJoined, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
         );
 
         pack();
@@ -224,6 +269,14 @@ public class WellCalibrationUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane ExplorerScrollPane1;
+    private javax.swing.JScrollPane LogPanel1;
+    private javax.swing.JScrollPane LogPanel2;
+    private javax.swing.JScrollPane LogPanelJoined;
+    private javax.swing.JScrollPane XMLScrollPane1;
+    private javax.swing.JScrollPane XMLScrollPane2;
+    private javax.swing.JTable XMLTable1;
+    private javax.swing.JTable XMLTable2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JFileChooser jFileChooser1;
@@ -232,10 +285,6 @@ public class WellCalibrationUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }
